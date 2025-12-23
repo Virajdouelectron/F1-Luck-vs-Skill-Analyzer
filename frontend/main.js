@@ -9,25 +9,13 @@ function loadCSVtoTable(csvPath, tableDivId) {
         html += '<tr>' + rows[i].map(d => `<td>${d}</td>`).join('') + '</tr>';
       }
       html += '</tbody></table>';
-      document.getElementById(tableDivId).innerHTML = html;
     });
 }
 window.onload = function() {
   loadCSVtoTable('../output/luck_adjusted_championship.csv', 'champ-table');
   loadCSVtoTable('../output/luck_index_per_driver.csv', 'luck-table');
-  loadCSVtoTable('../output/most_lucky_per_season.csv', 'most-lucky');
-  loadCSVtoTable('../output/most_unlucky_per_season.csv', 'most-unlucky');
-  // Load plots
-  fetch('../output/')
-    .then(resp => resp.text())
-    .then(text => {
-      const plotImgs = [];
-      const re = /luck_vs_skill_(\d+)\.png/g;
-      let m;
-      while ((m = re.exec(text)) !== null) {
-        plotImgs.push(m[0]);
-      }
-      let html = plotImgs.map(f => `<img src="../output/${f}" alt="Luck vs Skill ${f.replace(/[^\d]/g,'')}">`).join('');
-      document.getElementById('plots-gallery').innerHTML = html;
-    });
+  // List all PNGs found in output/ (years 1950-1989 as detected)
+  const plotYears = [1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989];
+  let html = plotYears.map(year => `<img src="output/luck_vs_skill_${year}.png" alt="Luck vs Skill ${year}">`).join('');
+  document.getElementById('plots-gallery').innerHTML = html;
 };
