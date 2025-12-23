@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assumptions & Methodology - F1 Luck vs Skill Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #e10600; /* F1 red */
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h2 {
+      border-bottom: 2px solid #e10600;
+      padding-bottom: 5px;
+      margin-top: 30px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    code {
+      background: #f4f4f4;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>F1 Luck vs Skill Analyzer</h1>
+    <h2>Assumptions & Methodology</h2>
+    
+    <h3>Assumptions</h3>
+    <ol>
+      <li><strong>Mechanical DNFs</strong> are identified by status descriptions containing terms like "Engine", "Hydraulics", etc. (see <code>luck_mechanical_dnf</code> in code).</li>
+      <li><strong>Safety car and pit stop luck</strong> are not directly available; placeholders exist for future lap/pit timing analysis.</li>
+      <li><strong>Teammate comparison</strong> is a placeholder; logic can be added for direct intra-team comparison if required.</li>
+      <li><strong>Lap time-based metrics</strong> (race pace, consistency) require merging with <code>lap_times.csv</code>, currently marked as placeholders.</li>
+      <li><strong>Positions gained</strong> is set to zero for DNFs (not classified).</li>
+      <li><strong>Luck-adjusted points</strong> = Official points + Luck Index (simple sum for demonstration, can be refined).</li>
+      <li><strong>All groupings</strong> (for standings, luck index, etc.) are per season (using <code>year</code> from races).</li>
+      <li><strong>Plots</strong> use available skill and luck scores; missing values (from placeholders) are ignored.</li>
+      <li><strong>No external data or APIs</strong> are used; only provided CSVs are loaded from the local data folder.</li>
+    </ol>
+
+    <h3>Methodology</h3>
+    <ul>
+      <li>Data is loaded, cleaned, and merged using <code>raceId</code>, <code>driverId</code>, <code>constructorId</code>, and <code>statusId</code>.</li>
+      <li>Skill and luck metrics are calculated per driver per race, then aggregated per season.</li>
+      <li>All outputs (tables and plots) are saved to the <code>output/</code> directory for frontend use.</li>
+    </ul>
+
+    <p><em>For further refinement, update the placeholders for lap time and teammate logic in <code>src/skill_luck.py</code>.</em></p>
+  </div>
+</body>
+</html>
